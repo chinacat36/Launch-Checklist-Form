@@ -1,4 +1,5 @@
 // Write your JavaScript code here!
+
 window.addEventListener("load", function() {
        let form = document.querySelector("form");
        let pilotName = document.querySelector("input[name = pilotName]"); 
@@ -7,16 +8,15 @@ window.addEventListener("load", function() {
        let cargoMass = document.querySelector("input[name = cargoMass]");
        let submitButton = document.getElementById("formSubmit");
 form.addEventListener("submit", function(){
-       if(pilotName.value === "" || coPilotName.value === "" || fuelLevel.value === "" || cargoMass.value === ""){
+         if(pilotName.value === "" || coPilotName.value === "" || fuelLevel.value === "" || cargoMass.value === ""){
          window.alert("All fields are required.");
          faultyItems.style.visibility = "hidden";
          event.preventDefault();
-      }else if (pilotName.value !== String || coPilotName.value !== String || isNaN(fuelLevel.value) === true || isNaN(cargoMass.value) === true){
+      }else if(isNaN(pilotName.value) === false || isNaN(coPilotName.value) === false || isNaN(fuelLevel.value) === true || isNaN(cargoMass.value) === true){
          alert("Please enter a valid value");
          faultyItems.style.visibility = "hidden"
          event.preventDefault();
-      };
-submitButton.addEventListener("click", function(){
+      }else{
          faultyItems.style.visibility = "visible"
          event.preventDefault();
          let pilotStatus = document.getElementById("pilotStatus");
@@ -45,8 +45,9 @@ submitButton.addEventListener("click", function(){
             fuelStatus.innerHTML = `Enough fuel for your journey.`
             event.preventDefault();
          };
-      });
+   };
    });
+
        fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
                         let missionTarget = document.getElementById("missionTarget");
                         response.json().then(function(json) {
